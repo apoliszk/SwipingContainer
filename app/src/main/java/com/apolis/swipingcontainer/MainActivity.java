@@ -2,37 +2,33 @@ package com.apolis.swipingcontainer;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import android.view.View;
 
 public class MainActivity extends Activity {
+    private SwipingContainer mSwipingContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mSwipingContainer = (SwipingContainer) findViewById(R.id.swipingContainer);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public void btnClickHandler(View btn) {
+        switch (btn.getId()) {
+            case R.id.btnFirst:
+                mSwipingContainer.swipeToIndex(1);
+                break;
+            case R.id.btnSecond:
+                mSwipingContainer.swipeToIndex(2);
+                break;
+            case R.id.btnThird:
+                mSwipingContainer.swipeToIndex(3);
+                break;
+            case R.id.btnForth:
+                mSwipingContainer.swipeToIndex(0);
+                break;
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

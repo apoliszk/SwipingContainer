@@ -3,60 +3,93 @@
                 android:layout_height="match_parent">
 
     <com.apolis.swipingcontainer.SwipingContainer
+        android:id="@+id/swipingContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#433166">
+            android:background="#433166"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="First View"
                 android:textColor="@android:color/white"/>
-        </FrameLayout>
 
-        <FrameLayout
+            <Button
+                android:id="@+id/btnFirst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnClickHandler"
+                android:text="Go to second View"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#626626">
+            android:background="#626626"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="Second View"
                 android:textColor="@android:color/white"/>
-        </FrameLayout>
 
-        <FrameLayout
+            <Button
+                android:id="@+id/btnSecond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnClickHandler"
+                android:text="Go to third View"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#09663b">
+            android:background="#09663b"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="Third View"
                 android:textColor="@android:color/white"/>
-        </FrameLayout>
 
-        <FrameLayout
+            <Button
+                android:id="@+id/btnThird"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnClickHandler"
+                android:text="Go to forth View"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#663f03">
+            android:background="#663f03"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="Forth View"
                 android:textColor="@android:color/white"/>
-        </FrameLayout>
+
+            <Button
+                android:id="@+id/btnForth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnClickHandler"
+                android:text="Go to first View"/>
+        </LinearLayout>
     </com.apolis.swipingcontainer.SwipingContainer>
 
 </RelativeLayout>
