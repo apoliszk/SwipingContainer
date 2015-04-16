@@ -59,7 +59,7 @@ Android容器，基于FrameLayout实现
         </com.apolis.swipingcontainer.SwipingContainer>
     </RelativeLayout>
 
-###获取当前显示子项的index
+###获取当前显示子视图的index
     int visibleIndex = swipingContainer.getVisibleIndex();
-###让容器滚动到第n个子项
+###让容器显示第n个子视图
     swipingContainer.swipeToIndex(n);
