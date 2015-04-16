@@ -5,7 +5,7 @@ Android容器，基于FrameLayout实现
     可添加多个子视图，一次只显示一个子视图。通过水平拖拽或快速滑动切换显示的子视图。
 ###图例
 ![image](https://raw.githubusercontent.com/apoliszk/SwipingContainer/master/demo.gif)
-###可在layout xml中使用
+###在layout xml中使用
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
