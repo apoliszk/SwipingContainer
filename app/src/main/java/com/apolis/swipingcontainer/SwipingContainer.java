@@ -81,7 +81,7 @@ public class SwipingContainer extends FrameLayout {
         }
     }
 
-    private int getVisibleIndex() {
+    public int getVisibleIndex() {
         int w = this.getWidth();
         int index;
         if (mHScrollPos < 0) {
