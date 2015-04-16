@@ -5,7 +5,7 @@ Android容器，基于FrameLayout实现
     可添加多个子视图，一次只显示一个子视图。通过水平拖拽或快速滑动切换显示的子视图。
 ###图例
 ###可在layout xml中使用
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -53,32 +53,10 @@ Android容器，基于FrameLayout实现
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="btnClickHandler"
-                android:text="Go to third View"/>
+                android:text="Go to first View"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#09663b"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Third View"
-                android:textColor="@android:color/white"/>
-
-            <Button
-                android:id="@+id/btnThird"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="btnClickHandler"
-                android:text="Go to forth View"/>
-        </LinearLayout>
-    </com.apolis.swipingcontainer.SwipingContainer>
-
-</RelativeLayout>
+    </RelativeLayout>
 
 ###获取当前显示子项的index
     int visibleIndex = swipingContainer.getVisibleIndex();
