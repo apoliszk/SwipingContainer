@@ -10,7 +10,7 @@ Android容器，基于FrameLayout实现
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
     
-        <com.apolis.swipingcontainer.SwipingContainer
+        <com.apolis.android.swipingcontainer.SwipingContainer
             android:id="@+id/swipingContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -56,7 +56,7 @@ Android容器，基于FrameLayout实现
                     android:onClick="btnClickHandler"
                     android:text="Go to first View"/>
             </LinearLayout>
-        </com.apolis.swipingcontainer.SwipingContainer>
+        </com.apolis.android.swipingcontainer.SwipingContainer>
     </RelativeLayout>
 
 ###获取当前显示子视图的index
