@@ -1,4 +1,4 @@
-package com.apolis.swipingcontainer;
+package com.apolis.android.swipingcontainer;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

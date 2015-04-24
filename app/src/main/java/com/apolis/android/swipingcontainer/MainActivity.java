@@ -1,4 +1,4 @@
-package com.apolis.swipingcontainer;
+package com.apolis.android.swipingcontainer;
 
 import android.app.Activity;
 import android.os.Bundle;

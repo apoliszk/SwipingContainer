@@ -2,7 +2,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.apolis.swipingcontainer.SwipingContainer
+    <com.apolis.android.swipingcontainer.SwipingContainer
         android:id="@+id/swipingContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -90,6 +90,6 @@
                 android:onClick="btnClickHandler"
                 android:text="Go to first View"/>
         </LinearLayout>
-    </com.apolis.swipingcontainer.SwipingContainer>
+    </com.apolis.android.swipingcontainer.SwipingContainer>
 
 </RelativeLayout>
