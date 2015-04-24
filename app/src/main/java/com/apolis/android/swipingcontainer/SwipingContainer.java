@@ -1,5 +1,6 @@
 package com.apolis.android.swipingcontainer;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
@@ -14,14 +15,17 @@ import android.widget.FrameLayout;
 
 public class SwipingContainer extends FrameLayout {
     private static final TimeInterpolator sDecelerate = new DecelerateInterpolator();
+    private static final int animateDuration = 400;
 
-    public int animateDuration = 400;
-    public boolean changeAlphaWhenSwiping = false;
+    private float mHScrollPos;
 
     private GestureDetector mGestureDetector;
-    private float mHScrollPos;
     private ValueAnimator mAnimator;
     private ValueAnimator.AnimatorUpdateListener mAnimatorUpdateListener;
+    private Animator.AnimatorListener mAnimatorEndListener;
+
+    private int mVisibleIndex;
+    private VisibleIndexChangeListener mVisibleIndexChangeListener;
 
     public SwipingContainer(Context context) {
         super(context);
@@ -35,6 +39,7 @@ public class SwipingContainer extends FrameLayout {
 
     private void init(Context context) {
         mHScrollPos = .0f;
+        mVisibleIndex = 0;
 
         mGestureDetector = new GestureDetector(context, new SwipingContainerGestureListener());
         mAnimatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
@@ -44,30 +49,58 @@ public class SwipingContainer extends FrameLayout {
                 setHScrollPos(curValue);
             }
         };
+        mAnimatorEndListener = new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                adjustChildren();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
     }
 
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
-        updateChildrenState(false);
+        updateChildrenState();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
+        boolean result = mGestureDetector.onTouchEvent(event);
+        if (!result
+                && (event.getAction() == MotionEvent.ACTION_UP
+                || event.getAction() == MotionEvent.ACTION_CANCEL)) {
             adjustChildren();
+            result = true;
         }
-        return mGestureDetector.onTouchEvent(event);
+        return result;
     }
 
     private void setHScrollPos(float HScrollPos) {
         this.mHScrollPos = HScrollPos;
-        updateChildrenState(true);
+        if (mVisibleIndexChangeListener != null) {
+            mVisibleIndexChangeListener.onVisibleIndexChanging(caculateVisibleIndexInFloat());
+        }
+        updateChildrenState();
     }
 
-    private void updateChildrenState(boolean updateAlpha) {
+    private void updateChildrenState() {
         int w = this.getWidth();
-        int curVisibleIndex = getVisibleIndex();
+        int curVisibleIndex = (int) caculateVisibleIndexInFloat();
         for (int i = 0, len = this.getChildCount(); i < len; i++) {
             View child = this.getChildAt(i);
             if (i == curVisibleIndex) {
@@ -82,32 +115,6 @@ public class SwipingContainer extends FrameLayout {
                 child.setX(0);
                 child.setVisibility(GONE);
             }
-            if (updateAlpha) {
-                updateChildAlpha(child);
-            }
-        }
-    }
-
-    private void updateChildAlpha(View child) {
-        if (changeAlphaWhenSwiping) {
-            int w = this.getWidth();
-            float x = child.getX();
-            float visibleSize;
-            if (x < 0) {
-                visibleSize = w + x;
-            } else {
-                visibleSize = w - x;
-            }
-            float ratio = visibleSize / w;
-            if (ratio < .7f) {
-                child.setAlpha(.7f);
-            } else if (ratio > .9f) {
-                child.setAlpha(1f);
-            } else {
-                child.setAlpha(ratio);
-            }
-        } else {
-            child.setAlpha(1);
         }
     }
 
@@ -131,6 +138,7 @@ public class SwipingContainer extends FrameLayout {
 
         if (Math.abs(dst - mHScrollPos) < 5) {
             setHScrollPos(dst);
+            setVisibleIndex((int) (dst / w));
         } else {
             startAdjustAnimation(mHScrollPos, dst);
         }
@@ -140,43 +148,74 @@ public class SwipingContainer extends FrameLayout {
         stopAdjustAnimation();
 
         int w = this.getWidth();
-        int duration = (int)(Math.abs(src - dst) * animateDuration / w);
+        int duration = (int) (Math.abs(src - dst) * animateDuration / w);
         if (duration < 100) {
             duration = 100;
         }
         mAnimator = ObjectAnimator.ofFloat(src, dst).setDuration(duration);
         mAnimator.setInterpolator(sDecelerate);
         mAnimator.addUpdateListener(mAnimatorUpdateListener);
+        mAnimator.addListener(mAnimatorEndListener);
         mAnimator.start();
     }
 
     private void stopAdjustAnimation() {
         if (mAnimator != null) {
             mAnimator.cancel();
-            mAnimator.removeAllUpdateListeners();
+            mAnimator.removeUpdateListener(mAnimatorUpdateListener);
+            mAnimator.removeListener(mAnimatorEndListener);
         }
         mAnimator = null;
     }
 
-    public int getVisibleIndex() {
+    private float caculateVisibleIndexInFloat() {
         int w = this.getWidth();
-        int index;
+        float index;
         if (mHScrollPos < 0) {
             index = 0;
         } else {
-            index = (int) (mHScrollPos / w);
+            index = mHScrollPos / w;
         }
+        if (index > this.getChildCount() - 1) {
+            index = this.getChildCount() - 1;
+        }
+        index = ((int) (index * 10)) / 10.0f;
         return index;
     }
 
-    public boolean swipeToIndex(int index) {
-        if (index >= 0 && index < SwipingContainer.this.getChildCount()) {
-            int w = SwipingContainer.this.getWidth();
-            startAdjustAnimation(mHScrollPos, index * w);
-            return true;
-        } else {
-            return false;
+    private void setVisibleIndex(int visibleIndex) {
+        if (mVisibleIndex != visibleIndex) {
+            mVisibleIndex = visibleIndex;
+            if (mVisibleIndexChangeListener != null) {
+                mVisibleIndexChangeListener.onVisibleIndexChange(mVisibleIndex);
+            }
         }
+    }
+
+    public boolean swipeToIndex(int index, boolean animate) {
+        boolean indexValid = index >= 0 && index < this.getChildCount();
+        if (indexValid) {
+            int w = this.getWidth();
+            if (animate) {
+                startAdjustAnimation(mHScrollPos, index * w);
+            } else {
+                setHScrollPos(index * w);
+                setVisibleIndex(index);
+            }
+        }
+        return indexValid;
+    }
+
+    public VisibleIndexChangeListener getVisibleIndexChangeListener() {
+        return mVisibleIndexChangeListener;
+    }
+
+    public void setVisibleIndexChangeListener(VisibleIndexChangeListener visibleIndexChangeListener) {
+        mVisibleIndexChangeListener = visibleIndexChangeListener;
+    }
+
+    public int getVisibleIndex() {
+        return mVisibleIndex;
     }
 
     class SwipingContainerGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -208,15 +247,23 @@ public class SwipingContainer extends FrameLayout {
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             super.onFling(e1, e2, velocityX, velocityY);
 
-            int curVisibleIndex = getVisibleIndex();
+            int curVisibleIndex = (int) caculateVisibleIndexInFloat();
             int targetVisibleIndex;
             if (velocityX > 0) {
                 targetVisibleIndex = curVisibleIndex;
             } else {
                 targetVisibleIndex = curVisibleIndex + 1;
             }
-            swipeToIndex(targetVisibleIndex);
+            if (!swipeToIndex(targetVisibleIndex, true)) {
+                adjustChildren();
+            }
             return true;
         }
+    }
+
+    public static interface VisibleIndexChangeListener {
+        void onVisibleIndexChanging(float index);
+
+        void onVisibleIndexChange(int index);
     }
 }
