@@ -65,15 +65,16 @@ Android容器，基于FrameLayout实现
     swipingContainer.swipeToIndex(n, true); // 带动画效果
     swipingContainer.swipeToIndex(n, false); // 不带动画效果
 ###监听显示子视图改变事件
-    swipingContainer.setVisibleIndexChangeListener(new SwipingContainer.VisibleIndexChangeListener() {
-        @Override
-        public void onVisibleIndexChanging(float index) {
-            // 划动过程中，该方法会被调用，index是滑动进度
-            // 例如index = 0.1，代表在第一个子视图与第二个子视图之间，第一个子视图10%的位置
-        }
+    swipingContainer.setVisibleIndexChangeListener(
+        new SwipingContainer.VisibleIndexChangeListener() {
+            @Override
+            public void onVisibleIndexChanging(float index) {
+                // 划动过程中，该方法会被调用，index是滑动进度
+                // 例如index = 0.1，代表在第一个子视图与第二个子视图之间，第一个子视图10%的位置
+            }
         
-        @Override
-        public void onVisibleIndexChange(int index) {
-            // 滑动结束后，该方法会被调用，index是当前显示的子视图index
-        }
-    });
+            @Override
+            public void onVisibleIndexChange(int index) {
+                // 滑动结束后，该方法会被调用，index是当前显示的子视图index
+            }
+        });
