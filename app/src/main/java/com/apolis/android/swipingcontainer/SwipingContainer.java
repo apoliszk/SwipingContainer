@@ -21,8 +21,6 @@ public class SwipingContainer extends FrameLayout {
 
     private GestureDetector mGestureDetector;
     private ValueAnimator mAnimator;
-    private ValueAnimator.AnimatorUpdateListener mAnimatorUpdateListener;
-    private Animator.AnimatorListener mAnimatorEndListener;
 
     private int mVisibleIndex;
     private VisibleIndexChangeListener mVisibleIndexChangeListener;
@@ -42,14 +40,17 @@ public class SwipingContainer extends FrameLayout {
         mVisibleIndex = 0;
 
         mGestureDetector = new GestureDetector(context, new SwipingContainerGestureListener());
-        mAnimatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+
+        mAnimator = ObjectAnimator.ofFloat();
+        mAnimator.setInterpolator(sDecelerate);
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float curValue = (float) animation.getAnimatedValue();
                 setHScrollPos(curValue);
             }
-        };
-        mAnimatorEndListener = new Animator.AnimatorListener() {
+        });
+        mAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -69,7 +70,7 @@ public class SwipingContainer extends FrameLayout {
             public void onAnimationRepeat(Animator animation) {
 
             }
-        };
+        });
     }
 
     @Override
@@ -152,20 +153,14 @@ public class SwipingContainer extends FrameLayout {
         if (duration < 100) {
             duration = 100;
         }
-        mAnimator = ObjectAnimator.ofFloat(src, dst).setDuration(duration);
-        mAnimator.setInterpolator(sDecelerate);
-        mAnimator.addUpdateListener(mAnimatorUpdateListener);
-        mAnimator.addListener(mAnimatorEndListener);
-        mAnimator.start();
+        mAnimator.setFloatValues(src, dst);
+        mAnimator.setDuration(duration).start();
     }
 
     private void stopAdjustAnimation() {
-        if (mAnimator != null) {
+        if (mAnimator.isRunning()) {
             mAnimator.cancel();
-            mAnimator.removeUpdateListener(mAnimatorUpdateListener);
-            mAnimator.removeListener(mAnimatorEndListener);
         }
-        mAnimator = null;
     }
 
     private float caculateVisibleIndexInFloat() {
@@ -261,7 +256,7 @@ public class SwipingContainer extends FrameLayout {
         }
     }
 
-    public static interface VisibleIndexChangeListener {
+    public interface VisibleIndexChangeListener {
         void onVisibleIndexChanging(float index);
 
         void onVisibleIndexChange(int index);
