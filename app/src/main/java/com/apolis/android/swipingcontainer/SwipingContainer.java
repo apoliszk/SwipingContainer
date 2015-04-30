@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -36,7 +37,7 @@ public class SwipingContainer extends FrameLayout {
     }
 
     private void init(Context context) {
-        mHScrollPos = .0f;
+        mHScrollPos = 0;
         mVisibleIndex = 0;
 
         mGestureDetector = new GestureDetector(context, new SwipingContainerGestureListener());
@@ -74,13 +75,13 @@ public class SwipingContainer extends FrameLayout {
     }
 
     @Override
-    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    public void addView(@NonNull View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
         updateChildrenState();
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         boolean result = mGestureDetector.onTouchEvent(event);
         if (!result
                 && (event.getAction() == MotionEvent.ACTION_UP
@@ -199,10 +200,6 @@ public class SwipingContainer extends FrameLayout {
             }
         }
         return indexValid;
-    }
-
-    public VisibleIndexChangeListener getVisibleIndexChangeListener() {
-        return mVisibleIndexChangeListener;
     }
 
     public void setVisibleIndexChangeListener(VisibleIndexChangeListener visibleIndexChangeListener) {

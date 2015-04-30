@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
             @Override
             public void onVisibleIndexChange(int index) {
                 Toast.makeText(MainActivity.this, "index is " + index, Toast.LENGTH_SHORT).show();
+                Log.d("MainActivity", "index is " + mSwipingContainer.getVisibleIndex());
             }
         });
     }
