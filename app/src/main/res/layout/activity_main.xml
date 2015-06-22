@@ -1,140 +1,152 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background">
 
     <com.apolis.android.swipingcontainer.SwipingContainer
         android:id="@+id/swipingContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:paddingBottom="150dp">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#433166"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/github_step1"/>
+
+                <TextView
+                    style="@style/headerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set up Git"/>
+
+                <TextView
+                    style="@style/infoTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A quick guide to help you\nget started with Git."/>
+            </LinearLayout>
 
             <TextView
+                style="@style/indexTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="First View"
-                android:textColor="@android:color/white"/>
+                android:text="1"/>
+        </FrameLayout>
 
-            <Button
-                android:id="@+id/btnFirst"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="btnClickHandler"
-                android:text="Go to second View"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#626626"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/github_step2"/>
+
+                <TextView
+                    style="@style/headerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create repositories"/>
+
+                <TextView
+                    style="@style/infoTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Repositories are where you’ll work\nand collaborate on projects."/>
+            </LinearLayout>
 
             <TextView
+                style="@style/indexTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Second View"
-                android:textColor="@android:color/white"/>
+                android:text="2"/>
+        </FrameLayout>
 
-            <Button
-                android:id="@+id/btnSecond"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="btnClickHandler"
-                android:text="Go to third View"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#09663b"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/github_step3"/>
+
+                <TextView
+                    style="@style/headerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fork repositories"/>
+
+                <TextView
+                    style="@style/infoTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forking creates a new, unique project\nfrom an existing one."/>
+            </LinearLayout>
 
             <TextView
+                style="@style/indexTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Third View"
-                android:textColor="@android:color/white"/>
+                android:text="3"/>
+        </FrameLayout>
 
-            <Button
-                android:id="@+id/btnThird"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="btnClickHandler"
-                android:text="Go to forth View"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#663f03"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/github_step4"/>
+
+                <TextView
+                    style="@style/headerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Work together"/>
+
+                <TextView
+                    style="@style/infoTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send pull requests, follow friends.\nStar and watch projects."/>
+            </LinearLayout>
 
             <TextView
+                style="@style/indexTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forth View"
-                android:textColor="@android:color/white"/>
-
-            <Button
-                android:id="@+id/btnForth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="btnClickHandler"
-                android:text="Go to first View"/>
-        </LinearLayout>
+                android:text="4"/>
+        </FrameLayout>
     </com.apolis.android.swipingcontainer.SwipingContainer>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <CheckBox
-            android:id="@+id/cbCyclic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cyclic"/>
-
-        <TextView
-            android:id="@+id/txtIndex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go To Index: "/>
-
-        <EditText
-            android:id="@+id/editTxtGoToIndex"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"/>
-
-        <Button
-            android:id="@+id/btnGoTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go"/>
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
