@@ -61,51 +61,48 @@ public class GradientButton extends View {
     private void init(AttributeSet attrs, int defStyle) {
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.GradientButton, defStyle, 0);
 
-        if (a.hasValue(R.styleable.GradientButton_drawableStart)) {
-            mDrawableStart = a.getDrawable(R.styleable.GradientButton_drawableStart);
-        }
-        if (a.hasValue(R.styleable.GradientButton_drawableEnd)) {
-            mDrawableEnd = a.getDrawable(R.styleable.GradientButton_drawableEnd);
-        }
+        mDrawableStart = a.getDrawable(R.styleable.GradientButton_drawableStart);
+        mDrawableEnd = a.getDrawable(R.styleable.GradientButton_drawableEnd);
+
         a.recycle();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int minW = getPaddingLeft() + getPaddingRight();
-        if (mDrawableStart != null) {
-            minW = Math.max(minW, getPaddingLeft() + getPaddingRight() + mDrawableStart.getIntrinsicWidth());
-        }
+        mDrawableW = mDrawableStart.getIntrinsicWidth();
+        mDrawableH = mDrawableStart.getIntrinsicHeight();
+
+        int minW = getPaddingLeft() + getPaddingRight() + mDrawableW;
         int w = resolveSize(minW, widthMeasureSpec);
 
-        int minH = getPaddingBottom() + getPaddingTop();
-        if (mDrawableStart != null) {
-            minH += mDrawableStart.getIntrinsicHeight();
-        }
+        int minH = getPaddingBottom() + getPaddingTop() + mDrawableH;
         int h = resolveSize(minH, heightMeasureSpec);
 
         setMeasuredDimension(w, h);
+
+        mDrawableX = (w - mDrawableW) >> 1;
+        mDrawableY = (h - mDrawableH) >> 1;
     }
+
+    private int mDrawableX;
+    private int mDrawableY;
+
+    private int mDrawableW;
+    private int mDrawableH;
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
+        if (mRatio > 0) {
+            mDrawableEnd.setAlpha((int) (mRatio * 255));
+            mDrawableEnd.setBounds(mDrawableX, mDrawableY, mDrawableX + mDrawableW, mDrawableY + mDrawableH);
+            mDrawableEnd.draw(canvas);
+        }
 
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-
-        if (mDrawableStart != null) {
-            int imageX = paddingLeft + (contentWidth - mDrawableStart.getIntrinsicWidth()) / 2;
+        if (mRatio < 1) {
             mDrawableStart.setAlpha((int) ((1 - mRatio) * 255));
-            mDrawableStart.setBounds(imageX, paddingTop, imageX + mDrawableStart.getIntrinsicWidth(), paddingTop + mDrawableStart.getIntrinsicHeight());
-            if (mDrawableEnd != null) {
-                mDrawableEnd.setAlpha((int) (mRatio * 255));
-                mDrawableEnd.setBounds(mDrawableStart.getBounds());
-                mDrawableEnd.draw(canvas);
-            }
+            mDrawableStart.setBounds(mDrawableX, mDrawableY, mDrawableX + mDrawableW, mDrawableY + mDrawableH);
             mDrawableStart.draw(canvas);
         }
     }

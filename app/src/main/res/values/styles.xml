@@ -15,12 +15,4 @@
     <style name="infoTxt">
         <item name="android:gravity">center_horizontal</item>
     </style>
-
-    <style name="indexTxt">
-        <item name="android:textColor">#ffe4e1a8</item>
-        <item name="android:textSize">50sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginLeft">20dp</item>
-    </style>
 </resources>
