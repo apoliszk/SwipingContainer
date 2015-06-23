@@ -1,152 +1,152 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/background">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <com.apolis.android.swipingcontainer.SwipingContainer
         android:id="@+id/swipingContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="150dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/github_step1"/>
-
-                <TextView
-                    style="@style/headerTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Set up Git"/>
-
-                <TextView
-                    style="@style/infoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="A quick guide to help you\nget started with Git."/>
-            </LinearLayout>
-
-            <TextView
-                style="@style/indexTxt"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/github_step2"/>
-
-                <TextView
-                    style="@style/headerTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Create repositories"/>
-
-                <TextView
-                    style="@style/infoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Repositories are where you’ll work\nand collaborate on projects."/>
-            </LinearLayout>
+                android:src="@mipmap/github_step1"/>
 
             <TextView
-                style="@style/indexTxt"
+                style="@style/headerTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/github_step3"/>
-
-                <TextView
-                    style="@style/headerTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fork repositories"/>
-
-                <TextView
-                    style="@style/infoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Forking creates a new, unique project\nfrom an existing one."/>
-            </LinearLayout>
+                android:text="Set up Git"/>
 
             <TextView
-                style="@style/indexTxt"
+                style="@style/infoTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"/>
-        </FrameLayout>
+                android:text="A quick guide to help you\nget started with Git."/>
+        </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/github_step4"/>
-
-                <TextView
-                    style="@style/headerTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Work together"/>
-
-                <TextView
-                    style="@style/infoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Send pull requests, follow friends.\nStar and watch projects."/>
-            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/github_step2"/>
 
             <TextView
-                style="@style/indexTxt"
+                style="@style/headerTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4"/>
-        </FrameLayout>
+                android:text="Create repositories"/>
+
+            <TextView
+                style="@style/infoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Repositories are where you’ll work\nand collaborate on projects."/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/github_step3"/>
+
+            <TextView
+                style="@style/headerTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fork repositories"/>
+
+            <TextView
+                style="@style/infoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forking creates a new, unique project\nfrom an existing one."/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/github_step4"/>
+
+            <TextView
+                style="@style/headerTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Work together"/>
+
+            <TextView
+                style="@style/infoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send pull requests, follow friends.\nStar and watch projects."/>
+        </LinearLayout>
     </com.apolis.android.swipingcontainer.SwipingContainer>
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <com.apolis.android.swipingcontainer.GradientButton
+            android:id="@+id/btn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            app:drawableEnd="@mipmap/num_1_light"
+            app:drawableStart="@mipmap/num_1_gray"/>
+
+        <com.apolis.android.swipingcontainer.GradientButton
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            app:drawableEnd="@mipmap/num_2_light"
+            app:drawableStart="@mipmap/num_2_gray"/>
+
+        <com.apolis.android.swipingcontainer.GradientButton
+            android:id="@+id/btn3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            app:drawableEnd="@mipmap/num_3_light"
+            app:drawableStart="@mipmap/num_3_gray"/>
+
+        <com.apolis.android.swipingcontainer.GradientButton
+            android:id="@+id/btn4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            app:drawableEnd="@mipmap/num_4_light"
+            app:drawableStart="@mipmap/num_4_gray"/>
+    </LinearLayout>
+</LinearLayout>

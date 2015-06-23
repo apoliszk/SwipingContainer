@@ -216,7 +216,7 @@ public class SwipingContainer extends FrameLayout {
                         startAdjustAnimation(mHScrollPos, dstPos);
                     } else if (direction == DIRECTION_LEFT) {
                         startAdjustAnimation(mHScrollPos + w * this.getChildCount(), dstPos);
-                    } else {
+                    } else if (direction == DIRECTION_NEAREST) {
                         if (Math.abs(dstPos - mHScrollPos) <= Math.abs(mHScrollPos + w * this.getChildCount() - dstPos)) {
                             startAdjustAnimation(mHScrollPos, dstPos);
                         } else {
@@ -228,7 +228,7 @@ public class SwipingContainer extends FrameLayout {
                         startAdjustAnimation(mHScrollPos, dstPos + w * this.getChildCount());
                     } else if (direction == DIRECTION_LEFT) {
                         startAdjustAnimation(mHScrollPos, dstPos);
-                    } else {
+                    } else if (direction == DIRECTION_NEAREST) {
                         if (Math.abs(dstPos + w * this.getChildCount() - mHScrollPos) <= Math.abs(mHScrollPos - dstPos)) {
                             startAdjustAnimation(mHScrollPos, dstPos + w * this.getChildCount());
                         } else {
@@ -300,20 +300,23 @@ public class SwipingContainer extends FrameLayout {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             super.onFling(e1, e2, velocityX, velocityY);
-
-            int curVisibleIndex = (int) caculateVisibleIndexInFloat();
-            int targetVisibleIndex;
-            int direction = DIRECTION_RIGHT;
-            if (velocityX > 0) {
-                direction = DIRECTION_LEFT;
-                targetVisibleIndex = curVisibleIndex;
+            if (Math.abs(velocityX) > Math.abs(velocityY)) {
+                int curVisibleIndex = (int) caculateVisibleIndexInFloat();
+                int targetVisibleIndex;
+                int direction = DIRECTION_RIGHT;
+                if (velocityX > 0) {
+                    direction = DIRECTION_LEFT;
+                    targetVisibleIndex = curVisibleIndex;
+                } else {
+                    targetVisibleIndex = curVisibleIndex + 1;
+                }
+                if (!swipeToIndex(targetVisibleIndex, true, direction)) {
+                    adjustChildren();
+                }
+                return true;
             } else {
-                targetVisibleIndex = curVisibleIndex + 1;
+                return false;
             }
-            if (!swipeToIndex(targetVisibleIndex, true, direction)) {
-                adjustChildren();
-            }
-            return true;
         }
     }
 

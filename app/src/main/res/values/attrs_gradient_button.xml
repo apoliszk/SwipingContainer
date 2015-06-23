@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="GradientButton">
+        <attr name="drawableStart" format="reference"/>
+        <attr name="drawableEnd" format="reference"/>
+    </declare-styleable>
+</resources>

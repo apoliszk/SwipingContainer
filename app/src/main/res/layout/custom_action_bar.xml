@@ -4,14 +4,15 @@
               android:layout_height="match_parent"
               android:gravity="center_vertical"
               android:orientation="horizontal"
-              android:paddingLeft="8dp"
-              android:paddingRight="8dp">
+              android:paddingLeft="@dimen/action_bar_padding_left"
+              android:paddingRight="@dimen/action_bar_padding_right">
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/app_name"
+        android:textColor="@color/action_bar_txt_color"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
