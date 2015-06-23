@@ -58,7 +58,8 @@ Android容器，基于FrameLayout实现
             </LinearLayout>
         </com.apolis.android.swipingcontainer.SwipingContainer>
     </RelativeLayout>
-
+###设置支持循环
+    swipingContainer.setCyclic(true);
 ###获取当前显示子视图的index
     int visibleIndex = swipingContainer.getVisibleIndex();
 ###让容器显示第n个子视图
